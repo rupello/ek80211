@@ -1,6 +1,20 @@
+## Overview
+
+This app uses tshark to collect and parse 802.11 packets from a WLAN interface in monitor mode.
+Packets are loaded into elasticsearch using filebeat & can be visualized with Kibana.
+```
+  wlan-interface -> tshark -> filebeat(docker) -> elasticsearch/kibana(docker)
+```
+the script `hopper.sh` will hop through a defined list of WLAN channels (works on MacOSX only)
+
+Requires:
+ - MacOSX (but should be easily ported to Linux)
+ - tshark
+ - Docker
+
 ## Instructions
 
-Start logstash/elaticsearch/kibanda
+Start logstash/elaticsearch/kibana
 ```buildoutcfg
 cd elasticsearch
 docker-compose up
@@ -18,20 +32,6 @@ Start collecting packets:
 
 View the data in Kibana at [http://localhost:5601/](http://localhost:5601/)
 
-### Timelion Charts
-```
-.es(*, timefield=timestamp, split="layers.wlan.wlan_fc_wlan_fc_type:3").lines(stack=true,fill=3,width=1).mvavg(5)
-
-.es(index=packets-*, timefield=timestamp,split=layers.wlan_ssid:10, metric=avg:layers.wlan_radio_signal_dbm).points(weight=2)
-.es(index=packets-*, timefield=timestamp,split=layers.wlan_ssid:10, metric=avg:layers.wlan_radio_signal_dbm).points(weight=2).legend(position=se)
-
-.es(*,timefield=timestamp,metric=avg:layers.wlan_qbss_cu, split=layers.wlan_ssid:10 ).points()
-```
-
-Active Channels:
-```
-.es(*,timefield=timestamp, split=layers.wlan_radio_channel:10 ).lines(stack=true,fill=3,width=0).mvavg(3)
-```
-
+## References
 https://www.h21lab.com/tools/tshark-elasticsearch
 https://www.elastic.co/blog/analyzing-network-packets-with-wireshark-elasticsearch-and-kibana
