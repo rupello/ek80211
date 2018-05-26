@@ -1,0 +1,20 @@
+
+filebeat.prospectors:
+- type: stdin
+  json.keys_under_root: true
+
+processors:
+ - drop_event:
+     when:
+       equals:
+         index._type: "pcap_file"
+
+output.elasticsearch:
+  hosts: ["elk:9200"]
+  index: "packets-%{+yyyy.MM.dd}"
+
+setup.kibana:
+  host: "elk:5601"
+
+setup.template.name: "packets"
+setup.template.pattern: "packets-*"
