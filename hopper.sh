@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+which airport || echo "airport command not found - see readme.md" ; exit 1
+
 # seem to need to run 'airport en0 sniff 11'
 # or airport -z
 
