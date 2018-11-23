@@ -1,7 +1,8 @@
-version: '2'
+version: '3'
 
 services:
   elk:
+    container_name: elk  
     build: .
     environment:
       OPTS: -Dindex.number_of_shards=1 -Dindex.number_of_replicas=0
@@ -13,9 +14,8 @@ services:
       - ./elk-post-hooks.sh:/usr/local/bin/elk-post-hooks.sh
       - ./mappings.json:/_config/mappings.json
       - ./kibana:/_config/kibana/
-      # see https://github.com/elastic/kibana/issues/3709 for pushing kibana index patteerns
-      # https://github.com/nh2/kibana-importer
-      # this container has python3 :-)
+    healthcheck:
+        test: ["CMD", "curl", "-q", "http://localhost:5601"]
     networks:
       - elknet
 
