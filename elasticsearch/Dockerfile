@@ -1,4 +1,4 @@
-FROM sebp/elk
+FROM sebp/elk:642
 
 # We need to add python requests to import dashboards
 RUN apt-get update -y
