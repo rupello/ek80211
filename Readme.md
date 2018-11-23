@@ -43,6 +43,6 @@ Start collecting packets:
 View the data in Kibana at [http://localhost:5601/](http://localhost:5601/)
 
 ## References
-https://www.h21lab.com/tools/tshark-elasticsearch
-https://www.elastic.co/blog/analyzing-network-packets-with-wireshark-elasticsearch-and-kibana
-https://github.com/nh2/kibana-importer
+ - https://www.h21lab.com/tools/tshark-elasticsearch
+ - https://www.elastic.co/blog/analyzing-network-packets-with-wireshark-elasticsearch-and-kibana
+ - https://github.com/nh2/kibana-importer
