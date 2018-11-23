@@ -11,7 +11,17 @@ Requires:
  - MacOSX (but should be easily ported to Linux)
  - tshark
  - Docker
+ - jq
+ - `airport` command (see below)
 
+
+### airport
+The WLAN channel hopper uses the MacOSX `airport` command to hop through
+a sequence of WLAN channels:
+```bash
+sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \
+    /usr/local/bin/airport
+```
 ## Instructions
 
 Start logstash/elaticsearch/kibana
@@ -35,3 +45,4 @@ View the data in Kibana at [http://localhost:5601/](http://localhost:5601/)
 ## References
 https://www.h21lab.com/tools/tshark-elasticsearch
 https://www.elastic.co/blog/analyzing-network-packets-with-wireshark-elasticsearch-and-kibana
+https://github.com/nh2/kibana-importer
